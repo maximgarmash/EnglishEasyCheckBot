@@ -1,0 +1,28 @@
+{
+  "update_id": 985498447,
+  "message": {
+    "message_id": 17,
+    "from": {
+      "id": 726853849,
+      "is_bot": false,
+      "first_name": "Maks",
+      "username": "m_vitamat",
+      "language_code": "ru"
+    },
+    "chat": {
+      "id": 726853849,
+      "first_name": "Maks",
+      "username": "m_vitamat",
+      "type": "private"
+    },
+    "date": 1570683320,
+    "text": "/cryptocurrencies",
+    "entities": [
+      {
+        "offset": 0,
+        "length": 17,
+        "type": "bot_command"
+      }
+    ]
+  }
+}
