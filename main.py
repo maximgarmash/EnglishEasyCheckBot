@@ -14,27 +14,26 @@ bot = telebot.TeleBot(constants.token)
 
 
 @bot.message_handler(commands=['start'])
-def handle_start(message):
-        user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
-        user_markup.row('/start', '/stop')
-        user_markup.row('фото', 'аудио', 'документы')
-        user_markup.row('стикер', 'видео', 'голос', 'локация')
-        bot.send_message(message.from_user.id, 'Добро пожаловать..', reply_markup=user_markup)
+def start(message):
+    bot.reply_to(message, 'Hello, ' + message.from_user.first_name)
 
 
-@app.route('/', methods=['POST', 'GET'])
-def index()
+@bot.message_handler(func=lambda message: True, content_types=['text'])
+def echo_message(message):
+    bot.reply_to(message, message.text)
 
 
-    # @bot.message_handler(commands=['start'])
-    # def handle_start(message):
-    #     user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
-    #     user_markup.row('/start', '/stop')
-    #     user_markup.row('фото', 'аудио', 'документы')
-    #     user_markup.row('стикер', 'видео', 'голос', 'локация')
-    #     bot.send_message(message.from_user.id, 'Добро пожаловать..', reply_markup=user_markup)
+@app.route('/', methods=['POST'])
+def getMessage():
+    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+    return "!", 200
 
-    return '<h1>EnglishEasyCheckBot welcomes you<h1>'
+#
+# @app.route("/")
+# def webhook():
+#     bot.remove_webhook()
+#     bot.set_webhook(url='https://your_heroku_project.com/' + TOKEN)
+#     return "!", 200
 
 
 if __name__ == "__main__":
